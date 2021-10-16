@@ -32,7 +32,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
                                 </li>
-                                
+
                             @else
                                 <li class="nav-item">
                                     <a href="{{ route('login') }}" class="nav-link"><b>Login</b></a>
@@ -50,7 +50,7 @@
         </nav>
         <div class="wrapper">
             <div class="page-header clear-filter" filter-color="">
-                <div class="page-header-image" data-parallax="true" style="background-image: url('img/header1.jpg');">
+                <div class="page-header-image" data-parallax="true" style="background-image: url('img/header2.jpg');">
                 </div>
                 <div class="container">
                     <div class="content-center brand">
@@ -58,7 +58,7 @@
                         <!-- <h1 class="h1-seo hidden">Dot.Files</h1> -->
                         <h2></h2>
                         <h3 class="h3-seo" style="color: #f1c62d;">
-                            Mini Storage Management
+                            Digital File Management
                         </h3>
                     </div>
                 </div>

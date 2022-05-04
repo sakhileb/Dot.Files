@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
         "staudenmeir/laravel-adjacency-list": "^1.0",
+        "symfony/filesystem": "^5.4",
         "teamtnt/laravel-scout-tntsearch-driver": "^11.1"
     },
     "require-dev": {

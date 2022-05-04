@@ -24,7 +24,7 @@
                 @else
                 	@foreach ($ancestors as $ancestor)
                     	<a href="{{ route('files', ['uuid' => $ancestor->uuid]) }}" class="font-bold text-gray-400">
-                    		{{ $ancestor->objectable->name }} 
+                    		{{ $ancestor->objectable->name }}
                     	</a>
                     	@if(!$loop->last)
                 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-gray-300 w-5 h-5 mx-1">
@@ -46,8 +46,8 @@
                 </tr>
             </thead>
             <tbody>
-            	
-        		@if ($creatingNewFolder) 
+
+        		@if ($creatingNewFolder)
         			<tr class="border-gray-100 border-b-2 hover:bg-gray-100 ">
         				<td class="px-3">
         					<form class="flex items-center" wire:submit.prevent="createFolder">
@@ -63,7 +63,7 @@
         				<td></td>
         				<td></td>
         				<td></td>
-        			</tr> 
+        			</tr>
         		@endif
                 @foreach ($this->results as $child)
 	                <tr class="border-gray-100 @if (!$loop->last) border-b-2 @endif hover:bg-gray-100 ">
@@ -98,7 +98,7 @@
 	                    		</form>
 	                    	@else
 
-		                    	
+
 	                        @endif
 	                    </td>
 	                    <td class="py-2 px-3">
@@ -115,13 +115,13 @@
 	                        <div class="flex justify-end items-center">
 	                            <ul class="flex items-center">
 	                                <li class="mr-4">
-	                                    <button class="text-gray-400 font-bold" 
+	                                    <button class="text-gray-400 font-bold"
 	                                    wire:click="$set('renamingObject', {{ $child->id }})">
 	                                        Rename
 	                                    </button>
 	                                </li>
 	                                <li class="mr-4">
-	                                    <button class="text-red-400 font-bold" 
+	                                    <button class="text-red-400 font-bold"
 	                                    wire:click="$set('confirmingObjectDeletion', {{ $child->id }})">
 	                                        Delete
 	                                    </button>
@@ -161,9 +161,9 @@
         </x-jet-dialog-modal>
 
         <x-jet-modal wire:model="showingObjectloadForm">
-        	<div 
+        	<div
         		wire:ignore
-        		class="m-3 border-dashed border-2" 
+                class="m-auto"
         		x-data="{
         		initFilepond () {
         				const pond = FilePond.create(this.$refs.filepond, {
@@ -185,7 +185,34 @@
 		        }"
 		        x-init="initFilepond"
         	>
-        		<input type="file" x-ref="filepond" multiple>
+            <div class="flex justify-center">
+                <div class="rounded-lg shadow-xl bg-gray-50 w-full h-full">
+                    <div class="m-4">
+                        {{-- <label class="flex mb-2 text-gray-500 justify-center">
+                            Drag &amp; Drop your file or
+                        </label> --}}
+                        <div class="flex items-center justify-center w-full">
+                            <label class="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                <div class="flex flex-col items-center justify-center pt-7">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                        Browse Files
+                                    </p>
+                                </div>
+                                <input id="filepond" allowDrop dropOnPage="true" type="file" x-ref="filepond" class="hidden" multiple>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         	</div>
         </x-jet-modal>
     </div>

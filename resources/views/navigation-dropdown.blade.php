@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('files') }}">
-                        <img src="img/logo.png" alt="logo" class="block h-9 w-auto">
+                        <img src="{{ url('img/logo.png') }}" alt="logo" class="block h-9 w-auto">
                     </a>
                 </div>
 

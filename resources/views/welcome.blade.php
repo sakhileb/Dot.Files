@@ -27,21 +27,10 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">
                     <ul class="navbar-nav">
                         @if (Route::has('login'))
-
                             @auth
                                 <li class="nav-item">
-                                    <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
+                                    <a href="{{ url('/files') }}" class="nav-link">Files</a>
                                 </li>
-
-                            @else
-                                <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="nav-link"><b>Login</b></a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a href="{{ route('register') }}" class="nav-link"><b>Register</b></a>
-                                    </li>
-                                @endif
                             @endif
                         @endif
                     </ul>
@@ -60,6 +49,27 @@
                         <h3 class="h3-seo" style="color: #f1c62d;">
                             Digital File Management
                         </h3>
+                        @if (Route::has('login'))
+                            <div class="inline-flex">
+                                @auth
+                                    <a href="{{ url('/files') }}" class="btn btn-warning btn-round">
+                                        Files
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-warning btn-round">
+                                        Sign In
+                                    </a>
+                                    <br>
+                                    <span>- OR -</span>
+                                    <br>
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="btn btn-warning btn-round">
+                                            Create An Account
+                                        </a>
+                                    @endif
+                                @endauth
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -68,25 +78,20 @@
             <div class="container">
                 <nav>
                     <ul>
-                        <!-- <li>
-                            <a href="http://www.skdigital.blupininc.co.za">
-                                SK Digital
-                            </a>
-                        </li> -->
-                        <!-- <li>
-                            <a href="http://www.blog.skdigital.co.za" disabled="true">
-                                Blog
+                        <li>
+                            <a href="https://www.files.infodot.co.za/about" disabled="true">
+                                About
                             </a>
                         </li>
                         <li>
-                            <a href="#" disabled="true">
+                            <a href="https://www.files.infodot.co.za/terms" disabled="true">
                                 Terms &amp; Conditions
                             </a>
-                        </li> -->
+                        </li>
                     </ul>
                 </nav>
                 <div class="copyright">
-                    Dot.Files Is A Product Of InfoDot.
+                    Dot.Files Is A Product Of <a href="https://www.infodot.co.za" target="_blank">InfoDot</a>.
                 </div>
             </div>
         </footer>

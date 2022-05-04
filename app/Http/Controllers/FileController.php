@@ -18,7 +18,7 @@ class FileController extends Controller
     public function index(Request $request)
     {
     	$object = Obj::with('children.objectable', 'ancestorsAndSelf.objectable')->forCurrentTeam()->where(
-    		'uuid', $request->get('uuid', Obj::forCurrentTeam()->whereNull('parent_id')->first()->uuid)
+    		'uuid', $request->get('uuid', Obj::forCurrentTeam()->whereNull('parent_id')->first()->uuid())
     	)
     		->firstOrFail();
 

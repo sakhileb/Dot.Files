@@ -1,6 +1,6 @@
 # Dot.Files
 > Dot.Files gives teams a secure way to share, store and access information digitally. It's the digital file storage platform for all your important documents, images and files at work, in school or on the go. Organize your files into folders and subfolders. Easily stay in sync with each other while collaborating on projects or reviewing presentations without having to send separate emails back and forth..
-> Live demo [_here_](https://files.infodot.co.za).
+<!-- > Live demo [_here_](https://files.infodot.co.za). -->
 
 ## Table of Contents
 * [General Info](#general-information)

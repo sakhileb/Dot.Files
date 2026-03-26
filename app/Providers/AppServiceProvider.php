@@ -7,8 +7,10 @@ use App\Models\Folder;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,28 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        // Re-register Jetstream's x-jet-* Blade component aliases.
+        // These were registered by Jetstream 1.x but removed in Jetstream 4+.
+        // Our published views still use the x-jet-* prefix so we restore them here.
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            $components = [
+                'action-message', 'action-section', 'application-logo', 'application-mark',
+                'authentication-card', 'authentication-card-logo', 'banner', 'button',
+                'checkbox', 'confirmation-modal', 'confirms-password', 'danger-button',
+                'dialog-modal', 'dropdown', 'dropdown-link', 'form-section', 'input',
+                'input-error', 'label', 'modal', 'nav-link', 'responsive-nav-link',
+                'secondary-button', 'section-border', 'section-title', 'switchable-team',
+                'validation-errors', 'welcome',
+            ];
+
+            foreach ($components as $component) {
+                $blade->component(
+                    "vendor.jetstream.components.{$component}",
+                    "jet-{$component}"
+                );
+            }
+        });
+
         Relation::morphMap([
             'file' => File::class,
             'folder' => Folder::class,

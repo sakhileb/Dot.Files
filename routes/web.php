@@ -22,6 +22,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/files', [FileController::class, 'index'])->name('files');
-
-Route::get('/files/{file}', [FileController::class, 'download'])->name('files.download');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/files', [FileController::class, 'index'])->name('files');
+    Route::get('/files/{file}', [FileController::class, 'download'])->name('files.download');
+});

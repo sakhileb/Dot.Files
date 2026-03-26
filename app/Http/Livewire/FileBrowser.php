@@ -54,7 +54,7 @@ class FileBrowser extends Component
 
 	public function getResultsProperty()
 	{
-		if (strlen($this->query)) {
+		if (!empty($this->query)) {
 			return Obj::search($this->query)->where('team_id', $this->currentTeam->id)->get();
 		}
 		return $this->object->children;
@@ -62,23 +62,36 @@ class FileBrowser extends Component
 
 	public function deleteObject()
 	{
-		Obj::forCurrentTeam()->find($this->confirmingObjectDeletion)->delete();
+		$obj = Obj::forCurrentTeam()->find($this->confirmingObjectDeletion);
 		$this->confirmingObjectDeletion = null;
+
+		if (!$obj) {
+			return;
+		}
+
+		$obj->delete();
 		$this->object = $this->object->fresh();
 	}
 
 	public function updatedUpload($upload)
 	{
+		$this->validate([
+			'upload' => [
+				'required',
+				'file',
+				'max:102400',
+				'mimes:pdf,csv,txt,text,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif,webp,svg,zip,tar,gz,mp4,mp3,mov,avi',
+			],
+		]);
+
+		$safeName = basename($upload->getClientOriginalName());
+
 		$object = $this->currentTeam->objects()->make(['parent_id' => $this->object->id]);
 		$object->objectable()->associate(
 			$this->currentTeam->files()->create([
-				'name' => $upload->getClientOriginalName(),
+				'name' => $safeName,
 				'size' => $upload->getSize(),
-				'path' => $upload->storePublicly(
-					'files', [
-						'disk' => 'local'
-					]
-				)
+				'path' => $upload->store('files', ['disk' => 'local']),
 			])
 		);
 
@@ -94,7 +107,14 @@ class FileBrowser extends Component
 			'renamingObjectState.name' => 'required|max:255'
 		]);
 
-		Obj::forCurrentTeam()->find($this->renamingObject)->objectable->update($this->renamingObjectState);
+		$obj = Obj::forCurrentTeam()->find($this->renamingObject);
+
+		if (!$obj) {
+			$this->renamingObject = null;
+			return;
+		}
+
+		$obj->objectable->update($this->renamingObjectState);
 
 		$this->object = $this->object->fresh();
 

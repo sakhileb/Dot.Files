@@ -17,8 +17,8 @@ class CreateObjsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->morphs('objectable');
-            $table->foreignId('parent_id')->nullable()->contrained('objects');
-            $table->foreignId('team_id')->contrained('teams');
+            $table->foreignId('parent_id')->nullable()->constrained('objects');
+            $table->foreignId('team_id')->constrained('teams');
             $table->timestamps();
         });
     }

@@ -10,17 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-	public function __construct()
-	{
-		$this->middleware(['auth']);
-	}
-
     public function index(Request $request)
     {
-    	$object = Obj::with('children.objectable', 'ancestorsAndSelf.objectable')->forCurrentTeam()->where(
-    		'uuid', $request->get('uuid', Obj::forCurrentTeam()->whereNull('parent_id')->first())->uuid
-    	)
-    		->firstOrFail();
+        $uuid = $request->query('uuid')
+            ?? Obj::forCurrentTeam()->whereNull('parent_id')->value('uuid');
+
+    	$object = Obj::with('children.objectable', 'ancestorsAndSelf.objectable')
+    	    ->forCurrentTeam()
+    	    ->where('uuid', $uuid)
+    	    ->firstOrFail();
 
     	return view('files', [
     		'object' => $object,

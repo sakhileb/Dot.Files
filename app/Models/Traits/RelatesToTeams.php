@@ -6,6 +6,6 @@ trait RelatesToTeams
 {
 	public function scopeForCurrentTeam($query)
     {
-    	$query->where('team_id', auth()->user()->currentTeam->id);
+    	$query->where('team_id', auth()->user()->currentTeam?->id ?? 0);
     }
 }

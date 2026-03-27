@@ -8,13 +8,39 @@
         <title>Dot.Files</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
+        <!-- Alpine v3 (Livewire is not loaded on auth pages, so load Alpine from CDN) -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <style>
+            body {
+                font-family: 'Montserrat', sans-serif;
+                min-height: 100vh;
+                margin: 0;
+                position: relative;
+            }
+            body::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background-image: url('{{ asset('img/header2.jpg') }}');
+                background-size: cover;
+                background-position: center;
+                z-index: -2;
+            }
+            body::after {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.55);
+                z-index: -1;
+            }
+        </style>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

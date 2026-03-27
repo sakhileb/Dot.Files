@@ -1,7 +1,7 @@
 <div>
     <div class="flex flex-wrap items-center justify-between mb-4">
         <div class="flex-grow md:mr-3 mt-4 md:mt-0 w-full md:w-auto order-3 md:order-1">
-            <input type="search" placeholder="Search files and folders" class="w-full px-3 h-12 border-2 rounded-lg" wire:model="query">
+            <input type="search" placeholder="Search files and folders" class="w-full px-3 h-12 border-2 rounded-lg" wire:model.live.debounce.300ms="query">
         </div>
         <div class="order-2">
             <div>

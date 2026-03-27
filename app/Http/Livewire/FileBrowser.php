@@ -55,7 +55,12 @@ class FileBrowser extends Component
 	public function getResultsProperty()
 	{
 		if (!empty($this->query)) {
-			return Obj::search($this->query)->where('team_id', $this->currentTeam?->id ?? 0)->get();
+			$teamId = $this->currentTeam?->id ?? 0;
+			return Obj::search($this->query)
+				->get()
+				->filter(fn ($obj) => $obj->team_id === $teamId)
+				->values()
+				->load('objectable');
 		}
 		return $this->object->children;
 	}

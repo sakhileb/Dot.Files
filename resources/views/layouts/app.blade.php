@@ -16,7 +16,7 @@
         @livewireStyles
 
         <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
+        {{-- Alpine.js is bundled with Livewire v3 — do NOT load it separately --}}
         <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
     </head>
     <body class="font-sans antialiased">

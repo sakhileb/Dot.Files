@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,12 @@ class AppServiceProvider extends ServiceProvider
             'file' => File::class,
             'folder' => Folder::class,
         ]);
+
+        // Livewire v3 changed the default component namespace from
+        // App\Http\Livewire to App\Livewire. Register our components
+        // explicitly so they are found regardless of auto-discovery path.
+        Livewire::component('file-browser', \App\Http\Livewire\FileBrowser::class);
+        Livewire::component('navigation-dropdown', \App\Http\Livewire\NavigationDropdown::class);
 
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());

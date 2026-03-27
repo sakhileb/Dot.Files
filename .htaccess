@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the document root is the project root (not public/), redirect all
+    # requests into public/. This is the standard cPanel shared-hosting fix
+    # when the domain document root cannot be changed to point at public/.
+    #
+    # Requests for actual files/directories that already exist under public/
+    # are passed through unchanged by the rules in public/.htaccess.
+
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L,NC]
+</IfModule>

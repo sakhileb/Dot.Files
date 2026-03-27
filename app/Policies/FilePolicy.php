@@ -12,6 +12,6 @@ class FilePolicy
 
     public function download(User $user, File $file)
     {
-        return $file->team_id === $user->currentTeam->id;
+        return $user->currentTeam && $file->team_id === $user->currentTeam->id;
     }
 }

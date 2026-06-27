@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\EcosystemAuthController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,8 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/auth/ecosystem', [EcosystemAuthController::class, 'handle'])->name('auth.ecosystem');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/files', [FileController::class, 'index'])->name('files');
